@@ -172,6 +172,7 @@ export const Timer = () => {
             <Grid.Col span={6}>
                 <Text  mb='xs' ta='center' size='sm' >Rest between rounds</Text>
                 <Slider 
+                    label={(value) => `${value} seconds`}
                     disabled={isWorkoutActive || isRunning}
                     value={roundRest}
                     onChange={setRoundRest}
@@ -186,6 +187,7 @@ export const Timer = () => {
             <Grid.Col span={6}>
                 <Text mb='xs' ta='center' size='sm'>Rest between exercises</Text>
                 <Slider 
+                    label={(value) => `${value} seconds`}
                     disabled={isWorkoutActive || isRunning}
                     value={exerciseRest}
                     onChange={setExerciseRest}
