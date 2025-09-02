@@ -17,20 +17,19 @@ export default function Home() {
     <Center p={{ base: 'sm', md: 'xl' }} >
         <Grid>
           <Grid.Col span={{ base: 12, md: 6 }}>
-          <Stack >
-              <Timer />
-            <Paper withBorder shadow='lg' radius='md' p='lg'>
-              <CRUDButtons />
-            </Paper>
-            
-          </Stack>
+            <Stack >
+                <Timer />
+              <Paper withBorder shadow='lg' radius='md' p='lg'>
+                <CRUDButtons />
+              </Paper>
+            </Stack>
           </Grid.Col>
         
         
           <Grid.Col span={{ base: 12, md: 6 }}>
-          <Paper withBorder shadow='lg' radius='md' p='lg'>
-            <ExerciseList />
-          </Paper>
+            <Paper withBorder shadow='lg' radius='md' p='lg'>
+              <ExerciseList />
+            </Paper>
           </Grid.Col>
         </Grid>
    

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 export function useTimer(
   initialSeconds: number,
   isActive: boolean,
-  onComplete: () => void
+  onComplete: () => void,
 ) {
   const [remaining, setRemaining] = useState(initialSeconds)
 
@@ -21,7 +21,7 @@ export function useTimer(
 
     const id = setInterval(() => {
       setRemaining((prev) => prev - 1)
-    }, 1000)
+    }, 400)
 
     return () => clearInterval(id)
   }, [isActive, remaining, onComplete])

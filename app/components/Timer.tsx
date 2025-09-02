@@ -1,4 +1,6 @@
-import { Title, Text, Paper, Group, Button, Card, Grid } from '@mantine/core'
+'use client'
+
+import { Title, Text, Paper, Group, Button, Card, Grid, Slider } from '@mantine/core'
 import { useTimer } from '../utils/useTimer'
 import { useHIIT } from '../utils/useHIITContext'
 import { useState, useEffect } from 'react'
@@ -16,15 +18,20 @@ export const Timer = () => {
     nextExercise, 
     rounds, 
     setRounds, 
-    currentRound 
+    roundRest,
+    setRoundRest,
+    exerciseRest,
+    setExerciseRest
+
+    
   } = useHIIT()
   const current = exercises[currentIndex]
 
   const { remaining, formatTime, reset } = useTimer(
     current?.duration ?? 0,
-    current?.mode === 'timed' && isRunning,
+    current && (current.mode === 'timed' || current.mode === 'rest') && isRunning,
     () => {
-      if (current?.mode === 'timed') {
+      if (current?.mode === 'timed' || current?.mode === 'rest' ) {
         handleNext()
       }
     }
@@ -33,12 +40,16 @@ export const Timer = () => {
   const nextIndex = currentIndex + 1
   const totalExercises = exercises.length
 
-  let nextExerciseObj
-    if (nextIndex < totalExercises) {
-      nextExerciseObj = exercises[nextIndex]
-    } else {
-      nextExerciseObj = exercises[0]
+  const nextExerciseObj = currentIndex < totalExercises - 1 ? exercises[nextIndex] : undefined
+
+  // Stop timer when last exercise is reached
+  useEffect(() => {
+    if (currentIndex >= totalExercises - 1) {
+      setIsRunning(false)
+      setIsWorkoutActive(false)
+      // optionally, you could set a workoutComplete flag here
     }
+  }, [currentIndex, totalExercises])
 
   // Ensure first exercise of each round handles UI correctly
   useEffect(() => {
@@ -50,7 +61,7 @@ export const Timer = () => {
 
   const handleStart = () => {
     setIsWorkoutActive(true)
-    if (current?.mode === 'timed') setIsRunning(true)
+    if (current?.mode !== 'reps') setIsRunning(true)
   }
 
   const handleStop = () => {
@@ -59,6 +70,7 @@ export const Timer = () => {
 
   const handleReset = () => {
     resetWorkout()
+    reset()
     setIsRunning(false)
     setIsWorkoutActive(false)
   }
@@ -68,7 +80,7 @@ export const Timer = () => {
     reset()        // reset timer for the new current
 
     // Only start timer automatically if the next exercise is timed
-    setIsRunning(nextExerciseObj.mode === 'timed' && isWorkoutActive)
+    setIsRunning(nextExerciseObj?.mode === 'timed' || (nextExerciseObj?.mode === 'rest' && isWorkoutActive))
   }
 
   const handleRoundChange = () => {
@@ -80,12 +92,16 @@ export const Timer = () => {
       <Paper withBorder shadow='lg' radius='md' p='lg'>
 
         <Title ta='center' size={35}>
-        Round {currentRound} / {rounds}
+            Round {current?.round} / {rounds}
         </Title>
 
         <Card m='sm'>
-            <Title ta='center' size={100}>
-            {current?.mode === 'timed' ? formatTime(remaining) : remaining}
+            <Title ta='center' size={75}>
+                {current?.mode === 'complete'
+                    ? 'Finish'
+                    : current?.mode !== 'reps'
+                    ? formatTime(remaining)
+                    : remaining}
             </Title>
         </Card>
         
@@ -133,6 +149,9 @@ export const Timer = () => {
           <Button disabled={!isRunning} onClick={handleStop} color='red'>
             Stop
           </Button>
+          </Group>
+
+          <Group mt='sm' justify='center'>
           <Button
             disabled={current?.mode === 'timed'}
             onClick={handleNext}
@@ -147,7 +166,39 @@ export const Timer = () => {
           >
             Rounds {rounds}
           </Button>
-        </Group>
+          </Group>
+
+          <Grid justify='center' mt='md'>
+            <Grid.Col span={6}>
+                <Text  mb='xs' ta='center' size='sm' >Rest between rounds</Text>
+                <Slider 
+                    disabled={isWorkoutActive || isRunning}
+                    value={roundRest}
+                    onChange={setRoundRest}
+                    min={15}
+                    max={150}
+                    step={15}
+                />
+                <Text mt='xs' ta='center' size='sm' >{}</Text>
+            </Grid.Col>
+            
+            
+            <Grid.Col span={6}>
+                <Text mb='xs' ta='center' size='sm'>Rest between exercises</Text>
+                <Slider 
+                    disabled={isWorkoutActive || isRunning}
+                    value={exerciseRest}
+                    onChange={setExerciseRest}
+                    min={5}
+                    max={30}
+                    step={5}
+                />
+                <Text mt='xs' ta='center' size='sm' >{}</Text>
+            </Grid.Col>
+            
+            
+          </Grid>
+        
       </Paper>
     </>
   )
