@@ -37,7 +37,7 @@ export const CRUDButtons = () => {
                     />
 
                     <NumberInput 
-                        placeholder="Exercise duration / reps"
+                        placeholder={timed ? 'Duration' : 'Reps'}
                         value={duration}
                         onChange={setDuration}
                         step={timed ? 10 : 2 }
