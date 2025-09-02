@@ -29,11 +29,12 @@ export const CRUDButtons = () => {
         <>
         <form onSubmit={handleSubmit}>
             <Stack>
-                <Group>
+                <Group wrap='nowrap'>
                     <TextInput 
                         placeholder="Exercise name"
                         value={name}
                         onChange={(e) => setLabel(e.currentTarget.value)}
+                        maxLength={13}
                     />
 
                     <NumberInput 
@@ -44,8 +45,6 @@ export const CRUDButtons = () => {
                         min={0}
                         max={320}
                     />
-
-                    <Button type='submit'>Add Exercise</Button>
                 </Group>
                     
                 <Group justify="center">
@@ -62,6 +61,7 @@ export const CRUDButtons = () => {
                     </Group>
                    
                 </Group>
+                <Button type='submit'>Add Exercise</Button>
             </Stack>
         </form>
         </>

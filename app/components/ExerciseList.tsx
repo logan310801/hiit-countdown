@@ -7,16 +7,16 @@ export const ExerciseList = () => {
 
     return (
         <Stack justify='space-between'>
-        <Stack w={275} mih={475}>
+        <Stack >
 
                 <Text size='xl' ta='center' >Exercises</Text>
 
-            <Card mih='400px' style={{ height: '100%' }}>
+            <Card >
             {exercises.map((exercise) => 
-                    <Card p='sm' bg='gray' key={exercise.id}>
-                        <Group justify='space-between'>
+                    <Card mb='sm' p='sm' bg='gray' key={exercise.id}>
+                        <Group wrap='nowrap' justify='space-between'>
                             <Group>
-                                <Text ml='sm'>{exercise.name}</Text>
+                                <Text truncate ml='sm'>{exercise.name}</Text>
                                 <Text>{exercise.duration} {exercise.mode === 'reps' ? 'Reps' : 'Secs'}</Text>
     
                             </Group>

@@ -14,22 +14,25 @@ export default function Home() {
 
   return (
     <>
-    <Center style={{ height: '100vh' }}>
-      
-        <Group>
+    <Center p={{ base: 'sm', md: 'xl' }} >
+        <Grid>
+          <Grid.Col span={{ base: 12, md: 6 }}>
           <Stack >
               <Timer />
             <Paper withBorder shadow='lg' radius='md' p='lg'>
               <CRUDButtons />
             </Paper>
+            
           </Stack>
+          </Grid.Col>
         
         
-        
-          <Paper miw={300} withBorder shadow='lg' radius='md' p='lg'>
+          <Grid.Col span={{ base: 12, md: 6 }}>
+          <Paper withBorder shadow='lg' radius='md' p='lg'>
             <ExerciseList />
           </Paper>
-        </Group>
+          </Grid.Col>
+        </Grid>
    
  
     </Center>

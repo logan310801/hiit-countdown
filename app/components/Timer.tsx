@@ -1,4 +1,4 @@
-import { Title, Paper, Group, Button, Card } from '@mantine/core'
+import { Title, Text, Paper, Group, Button, Card, Grid } from '@mantine/core'
 import { useTimer } from '../utils/useTimer'
 import { useHIIT } from '../utils/useHIITContext'
 import { useState, useEffect } from 'react'
@@ -77,10 +77,12 @@ export const Timer = () => {
 
   return (
     <>
-      <Paper miw={600} mih={220} withBorder shadow='lg' radius='md' p='lg'>
+      <Paper withBorder shadow='lg' radius='md' p='lg'>
+
         <Title ta='center' size={35}>
-          Round {currentRound} / {rounds}
+        Round {currentRound} / {rounds}
         </Title>
+
         <Card m='sm'>
             <Title ta='center' size={100}>
             {current?.mode === 'timed' ? formatTime(remaining) : remaining}
@@ -88,25 +90,30 @@ export const Timer = () => {
         </Card>
         
         <Card m='sm'>
-        <Group justify='space-between'>
-            <Title ta='center' size={30}>
-            Current exercise
-            </Title>
-            <Title ta='center' size={20}>
-            Next exercise
-            </Title>
-        </Group>
-        <Group justify='space-between'>
-            
+            <Grid>
+                <Grid.Col span={6}>
 
-            
-            <Title ta='center' size={30}>
-            {current?.name ?? '-'}
-            </Title>
-            <Title  size={20}>
-            {nextExerciseObj?.name ?? '-'}
-            </Title>
-        </Group>
+                    <Text >
+                    Current exercise
+                    </Text>
+
+                    <Text >
+                    {current?.name ?? '-'}
+                    </Text>
+
+                </Grid.Col>
+                <Grid.Col span={6}>
+
+                    <Text opacity='50%'>
+                    Next exercise
+                    </Text>
+
+                    <Text opacity='50%'>
+                    {nextExerciseObj?.name ?? '-'}
+                    </Text>
+
+                </Grid.Col>
+            </Grid>
         </Card>
         
       </Paper>
