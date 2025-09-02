@@ -21,7 +21,7 @@ export function useTimer(
 
     const id = setInterval(() => {
       setRemaining((prev) => prev - 1)
-    }, 400)
+    }, 1000)
 
     return () => clearInterval(id)
   }, [isActive, remaining, onComplete])
