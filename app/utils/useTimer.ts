@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { countdownBeep, longBeep, shortBeep, speak } from './speak';
+import { longBeep, shortBeep, speak } from './speak';
 import { Exercise } from './useHIITContext';
 
 export function useTimer(
@@ -38,8 +38,10 @@ export function useTimer(
 
     // Countdown beeps for current exercise
     if (soundEnabled) {
-      if (remaining === 3 ) {
-        countdownBeep();
+      if (remaining === 3 || remaining === 2) {
+        shortBeep();
+      } else if (remaining === 1) {
+        longBeep()
       }
     }
 

@@ -7,17 +7,39 @@ export function speak(text: string) {
     }
   }
 
-export function longBeep() {
-    const beep = new Audio('beep-06.mp3'); // you need a beep.mp3 file
-    beep.play();
-}
+  let audioCtx: AudioContext | null = null;
 
-export function shortBeep() {
-    const beep = new Audio("beep-07a.mp3"); // you need a beep.mp3 file
-    beep.play();
-}
-
-export function countdownBeep() {
-    const beep = new Audio('3-2-1-countdown.mp3')
-    beep.play()
-}
+  function getAudioContext() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    }
+    return audioCtx;
+  }
+  
+  export function shortBeep() {
+    const ctx = getAudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+  
+    osc.type = "sine";
+    osc.frequency.value = 800; // Hz
+    gain.gain.value = 0.2; // volume
+  
+    osc.connect(gain).connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.15); // 150ms beep
+  }
+  
+  export function longBeep() {
+    const ctx = getAudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+  
+    osc.type = "sine";
+    osc.frequency.value = 600;
+    gain.gain.value = 0.2;
+  
+    osc.connect(gain).connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.5); // 500ms beep
+  }
