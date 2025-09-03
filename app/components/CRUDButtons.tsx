@@ -1,14 +1,19 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Group, Button, TextInput, Switch, Text, Stack, NumberInput } from '@mantine/core'
 import { useHIIT, Exercise } from "../utils/useHIITContext"
 import { v4 as uuidv4 } from 'uuid'
 
 export const CRUDButtons = () => {
     const [name, setLabel] = useState<string>('')
-    const [timed, setTimed] = useState<boolean>(false)
-    const [duration, setDuration] = useState<string | number>('')
+    const [timed, setTimed] = useState<boolean>(true)
+    const [duration, setDuration] = useState<number>(30)
 
     const { addExercise } = useHIIT()
+
+    useEffect(() => {
+        if (timed) setDuration(30) 
+            else setDuration(10)
+    }, [timed])
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
@@ -22,14 +27,30 @@ export const CRUDButtons = () => {
 
         addExercise(newExercise)
         setLabel('')
-        setDuration('')
+        setDuration(30)
+    }
+
+    const handleIncreaseDuration = () => {
+        if (timed && duration < 240 ) { 
+            setDuration(i => i + 5)
+        } else if (duration < 75) {
+            setDuration(i => i + 1)
+        }
+    }
+
+    const handleDecreaseDuration = () => {
+        if (timed && duration > 15 ) { 
+            setDuration(i => i - 5)
+        } else if (duration > 1) {
+            setDuration(i => i - 1)
+        }
     }
 
     return (
         <>
         <form onSubmit={handleSubmit}>
             <Stack>
-                <Group wrap='nowrap'>
+                
                     <TextInput 
                         radius='xl' 
                         placeholder="Exercise name"
@@ -37,18 +58,20 @@ export const CRUDButtons = () => {
                         onChange={(e) => setLabel(e.currentTarget.value)}
                         maxLength={13}
                     />
+                    <Group justify="center">
+                        <Button radius='xl' onClick={handleDecreaseDuration}>
+                            -
+                        </Button>
 
+                        <Text>
+                            {duration} {timed ? 'seconds' : 'reps'}
+                        </Text>
 
-                    <NumberInput 
-                        radius='xl' 
-                        placeholder={timed ? 'Duration' : 'Reps'}
-                        value={duration}
-                        onChange={setDuration}
-                        step={timed ? 10 : 2 }
-                        min={timed ? 15 : 2}
-                        max={320}
-                    />
-                </Group>
+                        <Button radius='xl' onClick={handleIncreaseDuration}>
+                            +
+                        </Button>
+                    </Group>
+                
                     
                 <Group justify="center">
                     <Group>
