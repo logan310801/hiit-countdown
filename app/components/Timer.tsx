@@ -149,23 +149,29 @@ export const Timer = ({ soundEnabled, toggleSound } : TimerProps) => {
         
         
       </Paper>
-      <Paper withBorder shadow='lg' radius='md' p='lg'>
+      <Paper withBorder shadow='lg' radius='md' p='sm'>
 
-      <Group gap='xs' justify='center'>
-          <Button
+      <Group gap='' wrap='nowrap' justify='center'>
+          <Button 
+            p={10}
+            radius='xl'
             disabled={isWorkoutActive || isRunning}
             color='green'
             onClick={handleStart}
           >
             Start
           </Button>
-          <Button onClick={handleReset} color='blue'>
+          <Button p={10}
+            radius='xl'onClick={handleReset} color='blue'>
             Reset
           </Button>
-          <Button disabled={!isWorkoutActive} onClick={handleStop} color='red'>
+          <Button p={10}
+            radius='xl' disabled={!isWorkoutActive} onClick={handleStop} color='red'>
             Stop
           </Button>
           <Button
+            p={10}
+            radius='xl'
             disabled={current?.mode === 'timed'  }
             onClick={handleNext}
             color='black'
