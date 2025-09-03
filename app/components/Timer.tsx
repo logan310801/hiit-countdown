@@ -104,18 +104,20 @@ export const Timer = ({ soundEnabled, toggleSound } : TimerProps) => {
   return (
     <>
       <Paper withBorder shadow='lg' radius='xl' p='lg'>
+        <Card  radius='xl' m='sm'>
+            <Title ta='center' size={35}>
+                Round {current?.round} / {rounds}
+            </Title>
+        </Card>
+        
 
-        <Title ta='center' size={35}>
-            Round {current?.round} / {rounds}
-        </Title>
-
-        <Card radius='xl' onClick={() => { if (current?.mode !== 'timed' || isRunning) handleNext() }} m='sm'>
+        <Card bg={current?.mode === 'reps' ? '' : 'gray' } radius='xl' onClick={() => { if (current?.mode !== 'timed' || isRunning) handleNext() }} m='sm'>
             <Title ta='center' size={75}>
                 {current?.mode === 'complete'
                     ? 'Finish'
                     : current?.mode !== 'reps'
                     ? formatTime(remaining)
-                    : remaining}
+                    : remaining + ' reps'}
             </Title>
         </Card>
         
@@ -216,7 +218,7 @@ export const Timer = ({ soundEnabled, toggleSound } : TimerProps) => {
                     disabled={isWorkoutActive || isRunning}
                     value={exerciseRest}
                     onChange={setExerciseRest}
-                    min={5}
+                    min={10}
                     max={30}
                     step={5}
                 />
