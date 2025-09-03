@@ -151,7 +151,7 @@ export const Timer = ({ soundEnabled, toggleSound } : TimerProps) => {
       </Paper>
       <Paper radius='xl' withBorder shadow='lg'  p='sm'>
 
-      <Group gap='xs' wrap='nowrap' justify='center'>
+      <Group gap='md' wrap='nowrap' justify='center'>
           <Button 
           w={70}
             p={10}
