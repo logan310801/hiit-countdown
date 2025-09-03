@@ -1,16 +1,23 @@
 'use client'
 
 import { Grid, Center, Stack, Paper, Group } from '@mantine/core'
-import { useTimer } from './utils/useTimer'
-import { useHIIT } from './utils/useHIITContext';
-
 import { Timer } from './components/Timer';
 import { CRUDButtons } from './components/CRUDButtons'
 import { ExerciseList } from './components/ExerciseList'
+import { longBeep, shortBeep } from './utils/speak';
+
+import { useState } from 'react'
 
 
 export default function Home() {
-  
+  const [soundEnabled, setSoundEnabled] = useState(false)
+
+  const toggleSound = () => {
+      if (!soundEnabled) {
+        shortBeep() 
+      }
+      setSoundEnabled(prev => !prev);
+      };
 
   return (
     <>
@@ -18,7 +25,7 @@ export default function Home() {
         <Grid>
           <Grid.Col span={{ base: 12, md: 6 }}>
             <Stack >
-                <Timer />
+                <Timer soundEnabled={soundEnabled} toggleSound={toggleSound} />
               <Paper withBorder shadow='lg' radius='md' p='lg'>
                 <CRUDButtons />
               </Paper>

@@ -1,11 +1,20 @@
 'use client'
 
 import { Title, Text, Paper, Group, Button, Card, Grid, Slider } from '@mantine/core'
+
 import { useTimer } from '../utils/useTimer'
 import { useHIIT } from '../utils/useHIITContext'
 import { useState, useEffect } from 'react'
 
-export const Timer = () => {
+import { Volume, VolumeX } from "lucide-react";
+
+
+type TimerProps = {
+    soundEnabled: boolean
+    toggleSound: () => void
+}
+
+export const Timer = ({ soundEnabled, toggleSound } : TimerProps) => {
   // Timer countdown state
   const [isRunning, setIsRunning] = useState(false)
   // Workout active state (true while user is in a workout, regardless of exercise mode)
@@ -26,6 +35,10 @@ export const Timer = () => {
     
   } = useHIIT()
   const current = exercises[currentIndex]
+  const nextIndex = currentIndex + 1
+  const totalExercises = exercises.length
+
+  const nextExerciseObj = currentIndex < totalExercises - 1 ? exercises[nextIndex] : undefined
 
   const { remaining, formatTime, reset } = useTimer(
     current?.duration ?? 0,
@@ -34,13 +47,13 @@ export const Timer = () => {
       if (current?.mode === 'timed' || current?.mode === 'rest' ) {
         handleNext()
       }
-    }
+    },
+    nextExerciseObj,
+    current,
+    soundEnabled
   )
 
-  const nextIndex = currentIndex + 1
-  const totalExercises = exercises.length
-
-  const nextExerciseObj = currentIndex < totalExercises - 1 ? exercises[nextIndex] : undefined
+  
 
   // Stop timer when last exercise is reached
   useEffect(() => {
@@ -209,6 +222,13 @@ export const Timer = () => {
                     color='gray'
                 >
                     {rounds}
+                </Button>
+                <Button onClick={toggleSound}>
+                    {soundEnabled ? (
+                        <Volume size={24}/>
+                    ) : (
+                        <VolumeX size={24}  />
+                    )}
                 </Button>
                 </Group>
                 
