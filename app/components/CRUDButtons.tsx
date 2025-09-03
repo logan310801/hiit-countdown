@@ -45,7 +45,7 @@ export const CRUDButtons = () => {
                         value={duration}
                         onChange={setDuration}
                         step={timed ? 10 : 2 }
-                        min={0}
+                        min={timed ? 15 : 2}
                         max={320}
                     />
                 </Group>
