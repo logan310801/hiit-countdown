@@ -3,7 +3,7 @@ import { Text, Stack } from '@mantine/core';
 export const HelpSection = () => {
   return (
     <>
-      <Stack style={{ height: '82vh' }}>
+      <Stack mb={90}>
         <Stack>
           <Text size="xl" ta="center">Welcome to HIIT Timer!</Text>
           <Text ta="center"></Text>
