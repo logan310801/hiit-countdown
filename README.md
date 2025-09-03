@@ -1,4 +1,4 @@
-🏋️‍♂️ HIIT Countdown Timer
+🏋️‍♂️ HIIT Countdown Timer (Built for mobile)
 
 A high-intensity interval training (HIIT) web app built with Next.js, React, and Mantine UI.
 Plan, customize, and run your workouts with audio/voice guidance, countdown beeps, and an intuitive interface.
