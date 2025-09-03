@@ -14,6 +14,7 @@ export const ExerciseList = () => {
     {exercises.map((exercise, idx) => (
 
       <Card
+      radius='xl' 
       key={`${exercise.id}-${exercise.round}-${idx}`}
       bg={
         exercise.mode === 'rest' ? exercise.isRoundRest ? 'black' : 'gray' : 'blue'
@@ -51,6 +52,7 @@ export const ExerciseList = () => {
 
             {(exercise.mode === 'timed' || exercise.mode === 'reps') && !exercise.isRoundRest && (
                 <Button
+                    radius='xl' 
                     color="red"
                     variant="subtle"
                     size="xs"
@@ -65,7 +67,7 @@ export const ExerciseList = () => {
   </Stack>
   
 
-  <Button disabled={exercises.length === 0} onClick={clearExercises} color="red" variant="subtle">
+  <Button radius='xl' disabled={exercises.length === 0} onClick={clearExercises} color="red" variant="subtle">
     Clear Exercises
   </Button>
 </Stack>

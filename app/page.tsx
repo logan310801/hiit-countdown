@@ -26,7 +26,7 @@ export default function Home() {
           <Grid.Col span={{ base: 12, md: 6 }}>
             <Stack >
                 <Timer soundEnabled={soundEnabled} toggleSound={toggleSound} />
-              <Paper withBorder shadow='lg' radius='md' p='lg'>
+              <Paper withBorder shadow='lg' radius='xl' p='lg'>
                 <CRUDButtons />
               </Paper>
             </Stack>
@@ -34,7 +34,7 @@ export default function Home() {
         
         
           <Grid.Col span={{ base: 12, md: 6 }}>
-            <Paper withBorder shadow='lg' radius='md' p='lg'>
+            <Paper withBorder shadow='lg' radius='xl' p='lg'>
               <ExerciseList />
             </Paper>
           </Grid.Col>

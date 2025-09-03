@@ -103,13 +103,13 @@ export const Timer = ({ soundEnabled, toggleSound } : TimerProps) => {
 
   return (
     <>
-      <Paper withBorder shadow='lg' radius='md' p='lg'>
+      <Paper withBorder shadow='lg' radius='xl' p='lg'>
 
         <Title ta='center' size={35}>
             Round {current?.round} / {rounds}
         </Title>
 
-        <Card onClick={() => { if (current?.mode !== 'timed' || isRunning) handleNext() }} m='sm'>
+        <Card radius='xl' onClick={() => { if (current?.mode !== 'timed' || isRunning) handleNext() }} m='sm'>
             <Title ta='center' size={75}>
                 {current?.mode === 'complete'
                     ? 'Finish'
@@ -119,12 +119,12 @@ export const Timer = ({ soundEnabled, toggleSound } : TimerProps) => {
             </Title>
         </Card>
         
-        <Card m='sm'>
-            <Grid>
+        <Card  radius='xl' m='sm'>
+            <Grid pl='lg'>
                 <Grid.Col span={6}>
 
                     <Text >
-                    Current exercise
+                    Current 
                     </Text>
 
                     <Text >
@@ -135,7 +135,7 @@ export const Timer = ({ soundEnabled, toggleSound } : TimerProps) => {
                 <Grid.Col span={6}>
 
                     <Text opacity='50%'>
-                    Next exercise
+                    Next 
                     </Text>
 
                     <Text opacity='50%'>
@@ -149,10 +149,11 @@ export const Timer = ({ soundEnabled, toggleSound } : TimerProps) => {
         
         
       </Paper>
-      <Paper withBorder shadow='lg' radius='md' p='sm'>
+      <Paper radius='xl' withBorder shadow='lg'  p='sm'>
 
-      <Group gap='' wrap='nowrap' justify='center'>
+      <Group gap='xs' wrap='nowrap' justify='center'>
           <Button 
+          w={70}
             p={10}
             radius='xl'
             disabled={isWorkoutActive || isRunning}
@@ -162,14 +163,17 @@ export const Timer = ({ soundEnabled, toggleSound } : TimerProps) => {
             Start
           </Button>
           <Button p={10}
+           w={70}
             radius='xl'onClick={handleReset} color='blue'>
             Reset
           </Button>
           <Button p={10}
+           w={70}
             radius='xl' disabled={!isWorkoutActive} onClick={handleStop} color='red'>
             Stop
           </Button>
           <Button
+           w={70}
             p={10}
             radius='xl'
             disabled={current?.mode === 'timed'  }
@@ -182,7 +186,7 @@ export const Timer = ({ soundEnabled, toggleSound } : TimerProps) => {
          
           </Paper>
 
-      <Paper withBorder shadow='lg' radius='md' p='lg'>
+      <Paper withBorder shadow='lg' radius='xl' p='lg'>
         
 
           
@@ -229,7 +233,7 @@ export const Timer = ({ soundEnabled, toggleSound } : TimerProps) => {
                 >
                     {rounds}
                 </Button>
-                <Button onClick={toggleSound}>
+                <Button radius='xl' onClick={toggleSound}>
                     {soundEnabled ? (
                         <Volume size={24}/>
                     ) : (

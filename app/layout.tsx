@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body style={{ backgroundColor: '#1A1B1E', margin: 0 }}>
         <MantineProvider defaultColorScheme="dark">
           <HIITProvider>
             {children}

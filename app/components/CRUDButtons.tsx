@@ -32,6 +32,7 @@ export const CRUDButtons = () => {
             <Stack>
                 <Group wrap='nowrap'>
                     <TextInput 
+                        radius='xl' 
                         placeholder="Exercise name"
                         value={name}
                         onChange={(e) => setLabel(e.currentTarget.value)}
@@ -40,6 +41,7 @@ export const CRUDButtons = () => {
 
 
                     <NumberInput 
+                        radius='xl' 
                         placeholder={timed ? 'Duration' : 'Reps'}
                         value={duration}
                         onChange={setDuration}
@@ -63,7 +65,7 @@ export const CRUDButtons = () => {
                     </Group>
                    
                 </Group>
-                <Button type='submit'>Add Exercise</Button>
+                <Button radius='xl' type='submit'>Add Exercise</Button>
             </Stack>
         </form>
         </>
