@@ -65,7 +65,7 @@ export const ExerciseList = () => {
   </Stack>
   
 
-  <Button onClick={clearExercises} color="red" variant="subtle">
+  <Button disabled={exercises.length === 0} onClick={clearExercises} color="red" variant="subtle">
     Clear Exercises
   </Button>
 </Stack>

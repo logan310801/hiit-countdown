@@ -66,6 +66,7 @@ export const Timer = () => {
 
   const handleStop = () => {
     setIsRunning(false)
+    setIsWorkoutActive(false)
   }
 
   const handleReset = () => {
@@ -139,7 +140,7 @@ export const Timer = () => {
 
       <Group gap='xs' justify='center'>
           <Button
-            disabled={isWorkoutActive}
+            disabled={isWorkoutActive || isRunning}
             color='green'
             onClick={handleStart}
           >
@@ -148,7 +149,7 @@ export const Timer = () => {
           <Button onClick={handleReset} color='blue'>
             Reset
           </Button>
-          <Button disabled={!isRunning} onClick={handleStop} color='red'>
+          <Button disabled={!isWorkoutActive} onClick={handleStop} color='red'>
             Stop
           </Button>
           <Button
@@ -159,6 +160,7 @@ export const Timer = () => {
             Next
           </Button>
           </Group>
+         
           </Paper>
 
       <Paper withBorder shadow='lg' radius='md' p='lg'>
