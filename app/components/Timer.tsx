@@ -158,7 +158,7 @@ export const Timer = ({ soundEnabled, toggleSound } : TimerProps) => {
           w={70}
             p={10}
             radius='xl'
-            disabled={isWorkoutActive || isRunning}
+            disabled={isWorkoutActive || isRunning || exercises.length === 0}
             color='green'
             onClick={handleStart}
           >
@@ -166,7 +166,7 @@ export const Timer = ({ soundEnabled, toggleSound } : TimerProps) => {
           </Button>
           <Button p={10}
            w={70}
-            radius='xl'onClick={handleReset} color='blue'>
+            radius='xl'onClick={handleReset} color='blue' disabled={exercises.length === 0}>
             Reset
           </Button>
           <Button p={10}
@@ -178,7 +178,7 @@ export const Timer = ({ soundEnabled, toggleSound } : TimerProps) => {
            w={70}
             p={10}
             radius='xl'
-            disabled={current?.mode === 'timed'  }
+            disabled={current?.mode === 'timed' || exercises.length === 0}
             onClick={handleNext}
             color='black'
           >

@@ -24,7 +24,7 @@ export const HelpSection = () => {
           </Text>
           <Text>
             5. Please enable sound before use. If you are having issues with
-            sound, try toggling the enable sound button and resetting (sound in
+            sound, try toggling the enable sound button, resetting and refreshing (sound in
             development)
           </Text>
         </Stack>
