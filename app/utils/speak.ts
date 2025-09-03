@@ -15,4 +15,9 @@ export function longBeep() {
 export function shortBeep() {
     const beep = new Audio("beep-07a.mp3"); // you need a beep.mp3 file
     beep.play();
-    }
+}
+
+export function countdownBeep() {
+    const beep = new Audio('3-2-1-countdown.mp3')
+    beep.play()
+}

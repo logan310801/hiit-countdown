@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { longBeep, shortBeep, speak } from './speak';
+import { countdownBeep, longBeep, shortBeep, speak } from './speak';
 import { Exercise } from './useHIITContext';
 
 export function useTimer(
@@ -29,20 +29,17 @@ export function useTimer(
       nextExerciseObj &&
       !nextSpokenRef.current
     ) {
-      speak(nextExerciseObj.name);
-      speak(String(nextExerciseObj.duration));
-      if (nextExerciseObj.mode === 'reps') speak('Reps');
-      else if (nextExerciseObj.mode !== 'complete') speak('Seconds');
+      
+      if (nextExerciseObj.mode === 'reps') {
+        speak(`${nextExerciseObj.name} ${String(nextExerciseObj.duration)} reps`);
+      } else if (nextExerciseObj.mode !== 'complete') speak(`${nextExerciseObj.name} ${String(nextExerciseObj.duration)} seconds`);
       nextSpokenRef.current = true;
     }
 
     // Countdown beeps for current exercise
     if (soundEnabled) {
-      if (remaining === 3 || remaining === 2) {
-        shortBeep();
-      }
-      if (remaining === 1) {
-        longBeep();
+      if (remaining === 3 ) {
+        countdownBeep();
       }
     }
 
