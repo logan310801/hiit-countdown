@@ -26,7 +26,7 @@ export function speak(text: string) {
   
     osc.type = "sine";
     osc.frequency.value = 800; // Hz
-    gain.gain.value = 4; // volume
+    gain.gain.value = 1; // volume
   
     osc.connect(gain).connect(ctx.destination);
     osc.start();
@@ -40,7 +40,7 @@ export function speak(text: string) {
   
     osc.type = "sine";
     osc.frequency.value = 600;
-    gain.gain.value = 4;
+    gain.gain.value = 1;
   
     osc.connect(gain).connect(ctx.destination);
     osc.start();
