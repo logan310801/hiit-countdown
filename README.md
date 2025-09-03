@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🏋️‍♂️ HIIT Countdown Timer
 
-## Getting Started
+A high-intensity interval training (HIIT) web app built with Next.js, React, and Mantine UI.
+Plan, customize, and run your workouts with audio/voice guidance, countdown beeps, and an intuitive interface.
 
-First, run the development server:
+👉 Live Demo: hiit-countdown.vercel.app
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+⸻
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+✨ Features
+	•	⏱️ Customizable HIIT Routines
+	•	Add exercises with duration or reps
+	•	Adjustable rest periods & round counts
+	•	🔊 Smart Audio Cues
+	•	Text-to-Speech (TTS) announces exercise names and reps/seconds
+	•	Countdown beeps before each exercise (works on mobile + desktop)
+	•	🎨 Modern UI
+	•	Dark theme using Mantine UI
+	•	Responsive design for mobile workouts
+	•	📱 Mobile-Friendly
+	•	Designed for use on-the-go with one-tap navigation
+	•	Touch events to advance rep-based exercises
+	•	🛠️ Built with modern technologies
+	•	Next.js (App Router) for performance & scalability
+	•	React hooks for timer and state management
+	•	Mantine UI for a clean, professional design
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+📚 Roadmap
+	•	Save & load workouts
+	•	User accounts with progress tracking
+	•	Offline PWA support
+	•	More sound themes & voice packs
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+⸻
 
-## Learn More
+🧑‍💻 About the Developer
 
-To learn more about Next.js, take a look at the following resources:
+👋 Hi, I’m Logan — a developer passionate about React, web performance, and building polished user experiences.
+This project demonstrates my ability to:
+	•	Architect React applications with clean hooks and contexts
+	•	Integrate browser APIs (Web Audio, Speech Synthesis)
+	•	Deliver responsive, production-ready UIs
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+⸻
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🌐 Live Demo
 
-## Deploy on Vercel
+👉 Try it here: hiit-countdown.vercel.app
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+⸻
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+📩 Contact
+	•	Email: logan310801@gmail.com
+	•	GitHub: yourusername
+	•	LinkedIn: (optional, if you want to include it)
+
+⸻
+
+✨ Thanks for checking out my project!
