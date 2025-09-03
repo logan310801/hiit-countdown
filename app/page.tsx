@@ -4,7 +4,7 @@ import { Grid, Center, Stack, Paper, Button, Drawer } from '@mantine/core'
 import { Timer } from './components/Timer';
 import { CRUDButtons } from './components/CRUDButtons'
 import { ExerciseList } from './components/ExerciseList'
-import { shortBeep, speak } from './utils/speak';
+import { shortBeep, longBeep, speak } from './utils/speak';
 
 import { useState } from 'react'
 import { useDisclosure } from '@mantine/hooks';
@@ -18,7 +18,8 @@ export default function Home() {
 
   const toggleSound = () => {
       if (!soundEnabled) {
-        shortBeep() 
+        shortBeep()
+        longBeep() 
         speak('Sound enabled')
       }
       setSoundEnabled(prev => !prev);
