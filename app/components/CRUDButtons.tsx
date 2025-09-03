@@ -2,7 +2,6 @@ import { useState } from "react"
 import { Group, Button, TextInput, Switch, Text, Stack, NumberInput } from '@mantine/core'
 import { useHIIT, Exercise } from "../utils/useHIITContext"
 import { v4 as uuidv4 } from 'uuid'
-import { speak } from "../utils/speak"
 
 export const CRUDButtons = () => {
     const [name, setLabel] = useState<string>('')

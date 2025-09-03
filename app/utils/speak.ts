@@ -11,7 +11,10 @@ export function speak(text: string) {
 
   function getAudioContext() {
     if (!audioCtx) {
-      audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const _window = window as typeof window & {
+        webkitAudioContext?: typeof AudioContext;
+      };
+      audioCtx = new (_window.AudioContext || _window.webkitAudioContext!)();
     }
     return audioCtx;
   }

@@ -1,5 +1,5 @@
 import { Card, Button, Text, Group, Stack } from '@mantine/core'
-import { useHIIT, Exercise } from '../utils/useHIITContext'
+import { useHIIT } from '../utils/useHIITContext'
 import { Trash } from 'lucide-react'
 
 export const ExerciseList = () => {

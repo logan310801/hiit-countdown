@@ -1,10 +1,10 @@
 'use client'
 
-import { Grid, Center, Stack, Paper, Group } from '@mantine/core'
+import { Grid, Center, Stack, Paper } from '@mantine/core'
 import { Timer } from './components/Timer';
 import { CRUDButtons } from './components/CRUDButtons'
 import { ExerciseList } from './components/ExerciseList'
-import { longBeep, shortBeep, speak } from './utils/speak';
+import { shortBeep, speak } from './utils/speak';
 
 import { useState } from 'react'
 
