@@ -49,16 +49,16 @@ export const ExerciseList = () => {
                 </Text>
             </Group>
 
-            {exercise.mode === 'timed' || exercise.mode === 'reps' && !exercise.isRoundRest && (
+            {(exercise.mode === 'timed' || exercise.mode === 'reps') && !exercise.isRoundRest && (
                 <Button
-                color="red"
-                variant="subtle"
-                size="xs"
-                onClick={() => exercise.id && deleteExercise(exercise.id)}
+                    color="red"
+                    variant="subtle"
+                    size="xs"
+                    onClick={() => exercise.id && deleteExercise(exercise.id)}
                 >
-                <Trash size={13} />
+                    <Trash size={13} />
                 </Button>
-            )}
+                )}
             </Group>
       </Card>
     ))}
