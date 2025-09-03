@@ -39,7 +39,7 @@ function buildWorkoutSequence(
   const sequence: Exercise[] = [];
   for (let r = 1; r <= rounds; r++) {
     baseExercises.forEach((ex, idx) => {
-      sequence.push({ ...ex, id: `exerciseID-ex-${r}-${idx}`, round: r });
+      sequence.push({ ...ex, round: r });
       const isLast = idx === baseExercises.length - 1;
       if (!isLast && exerciseRest > 0) {
         sequence.push({
@@ -84,6 +84,7 @@ export function HIITProvider({ children }: {children: React.ReactNode}) {
   const [roundRest, setRoundRest] = useState(30);
 
   useEffect(() => {
+    console.log('herhe')
     setSequence(buildWorkoutSequence(baseExercises, rounds, exerciseRest, roundRest));
     setCurrentIndex(0);
   }, [baseExercises, rounds, exerciseRest, roundRest]);
@@ -93,6 +94,7 @@ export function HIITProvider({ children }: {children: React.ReactNode}) {
   };
 
   const deleteExercise = (id: string) => {
+    
     setBaseExercises(prev => prev.filter(ex => ex.id !== id));
   };
 

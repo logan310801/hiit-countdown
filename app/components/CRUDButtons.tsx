@@ -14,6 +14,7 @@ export const CRUDButtons = () => {
         e.preventDefault()
 
         const newExercise: Exercise = {
+            id: uuidv4(),
             name: name[0].toUpperCase() + name.slice(1),
             mode: timed ? 'timed' : 'reps',
             duration: Number(duration)
@@ -53,7 +54,7 @@ export const CRUDButtons = () => {
                             checked={timed}
                             onChange={(e) => setTimed(e.currentTarget.checked)}
                             size='lg'
-                            color='orange'
+                            color='green'
 
                         />
                         <Text size='xl'>Timed</Text>

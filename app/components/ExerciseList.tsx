@@ -3,45 +3,67 @@ import { useHIIT, Exercise } from '../utils/useHIITContext'
 import { Trash } from 'lucide-react'
 
 export const ExerciseList = () => {
-    const { exercises, deleteExercise, clearExercises } = useHIIT()
+    const { exercises, deleteExercise, clearExercises, currentIndex } = useHIIT()
 
     return (
-        <Stack gap="sm" justify="space-between">
-  <Text size="xl" ta="center">Exercises</Text>
+
+    <Stack gap="sm" justify="space-between">
+    <Text size="xl" ta="center">Exercises</Text>
 
   <Stack gap="xs">
-    {exercises.map((exercise) => (
-      <Card
-      key={exercise.id}
-      bg={
-        exercise.mode === 'rest'
-          ? 'gray' // rest exercises get a different background
-          : exercise?.round && exercise.round % 2
-          ? 'blue.6'
-          : 'teal'
-      }
-      p='xs'
-      h={exercise.mode === 'rest' ? 50 : undefined} 
-    >
-        <Group justify="space-between" align="center" wrap='nowrap'>
-          <Group gap="sm" align="center" wrap='nowrap'>
-            <Text size={exercise.mode === 'rest' ? 'xs' : undefined} truncate>{exercise.name}</Text>
-            <Text size={exercise.mode === 'rest' ? 'xs' : undefined} >{exercise.duration} {exercise.mode === 'reps' ? 'Reps' : 'Secs'}</Text>
-            <Text size={exercise.mode === 'rest' ? 'xs' : undefined} >Round {exercise?.round}</Text>
-          </Group>
+    {exercises.map((exercise, idx) => (
 
-          <Button
-            color="red"
-            variant="subtle"
-            size="xs"
-            onClick={() => exercise.id && deleteExercise(exercise.id)}
-          >
-            <Trash size={13} />
-          </Button>
-        </Group>
+      <Card
+      key={`${exercise.id}-${exercise.round}-${idx}`}
+      bg={
+        exercise.mode === 'rest' ? exercise.isRoundRest ? 'black' : 'gray' : 'blue'
+      }
+      pt={exercise.mode === 'rest' ? 5 : 10}
+      pb={exercise.mode === 'rest' ? 5 : 10}
+      opacity={exercise.mode === 'rest' && !exercise.isRoundRest ? '50%' : 100}
+      bd={exercise.id === exercises[currentIndex].id && exercise.round === exercises[currentIndex]?.round ? '3px solid yellow' : undefined}
+ 
+    >
+        <Group
+            justify={exercise.isRoundRest ? "center" : "space-between"}
+            align="center"
+            wrap="nowrap"
+            >
+            <Group gap="sm" align="center" wrap="nowrap">
+                <Text
+                size={exercise.mode === "rest" ? "xs" : undefined}
+                truncate
+                >
+                {exercise.isRoundRest
+                    ? `Round ${exercise.round ? exercise.round + 1 : ""}`
+                    : exercise.name}
+                </Text>
+                <Text
+                size={exercise.mode === "rest" ? "xs" : undefined}
+                >
+                {exercise.mode === "complete"
+                    ? ""
+                    : exercise.mode === "timed" || exercise.mode === "rest"
+                    ? `${exercise.duration} Secs`
+                    : `${exercise.duration} Reps`}
+                </Text>
+            </Group>
+
+            {exercise.mode === 'timed' || exercise.mode === 'reps' && !exercise.isRoundRest && (
+                <Button
+                color="red"
+                variant="subtle"
+                size="xs"
+                onClick={() => exercise.id && deleteExercise(exercise.id)}
+                >
+                <Trash size={13} />
+                </Button>
+            )}
+            </Group>
       </Card>
     ))}
   </Stack>
+  
 
   <Button onClick={clearExercises} color="red" variant="subtle">
     Clear Exercises

@@ -84,7 +84,7 @@ export const Timer = () => {
   }
 
   const handleRoundChange = () => {
-    setRounds(prev => (prev < 5 ? prev + 1 : 1))
+    setRounds(prev => (prev < 7 ? prev + 1 : 1))
   }
 
   return (
@@ -95,7 +95,7 @@ export const Timer = () => {
             Round {current?.round} / {rounds}
         </Title>
 
-        <Card m='sm'>
+        <Card onClick={() => { if (current?.mode !== 'timed' || isRunning) handleNext() }} m='sm'>
             <Title ta='center' size={75}>
                 {current?.mode === 'complete'
                     ? 'Finish'
@@ -131,11 +131,13 @@ export const Timer = () => {
                 </Grid.Col>
             </Grid>
         </Card>
+
+        
         
       </Paper>
-
       <Paper withBorder shadow='lg' radius='md' p='lg'>
-        <Group justify='center'>
+
+      <Group gap='xs' justify='center'>
           <Button
             disabled={isWorkoutActive}
             color='green'
@@ -149,28 +151,26 @@ export const Timer = () => {
           <Button disabled={!isRunning} onClick={handleStop} color='red'>
             Stop
           </Button>
-          </Group>
-
-          <Group mt='sm' justify='center'>
           <Button
-            disabled={current?.mode === 'timed'}
+            disabled={current?.mode === 'timed'  }
             onClick={handleNext}
-            color='grape'
+            color='black'
           >
             Next
           </Button>
-          <Button
-            onClick={handleRoundChange}
-            disabled={isWorkoutActive}
-            color={`red.${rounds + 4}`}
-          >
-            Rounds {rounds}
-          </Button>
           </Group>
+          </Paper>
 
-          <Grid justify='center' mt='md'>
+      <Paper withBorder shadow='lg' radius='md' p='lg'>
+        
+
+          
+          
+      
+      <Text  mb='xs' ta='center' size='md' >Rest</Text>
+          <Grid justify='center' >
             <Grid.Col span={6}>
-                <Text  mb='xs' ta='center' size='sm' >Rest between rounds</Text>
+                <Text  mb='xs' ta='center' size='xs' >Between rounds</Text>
                 <Slider 
                     label={(value) => `${value} seconds`}
                     disabled={isWorkoutActive || isRunning}
@@ -180,12 +180,12 @@ export const Timer = () => {
                     max={150}
                     step={15}
                 />
-                <Text mt='xs' ta='center' size='sm' >{}</Text>
+                <Text mt='xs' ta='center' size='xs' >{}</Text>
             </Grid.Col>
             
             
             <Grid.Col span={6}>
-                <Text mb='xs' ta='center' size='sm'>Rest between exercises</Text>
+                <Text mb='xs' ta='center' size='xs'>Between exercises</Text>
                 <Slider 
                     label={(value) => `${value} seconds`}
                     disabled={isWorkoutActive || isRunning}
@@ -197,9 +197,24 @@ export const Timer = () => {
                 />
                 <Text mt='xs' ta='center' size='sm' >{}</Text>
             </Grid.Col>
+            <Grid.Col span={12}>
+                <Group justify='center'>
+                    <Text>Rounds</Text>
+                <Button
+                    radius='xl'
+                    onClick={handleRoundChange}
+                    disabled={isWorkoutActive}
+                    color='gray'
+                >
+                    {rounds}
+                </Button>
+                </Group>
+                
+            </Grid.Col>
             
             
           </Grid>
+          
         
       </Paper>
     </>
