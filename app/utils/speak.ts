@@ -9,40 +9,39 @@ export function speak(text: string) {
 
   let audioCtx: AudioContext | null = null;
 
-  function getAudioContext() {
-    if (!audioCtx) {
-      const _window = window as typeof window & {
-        webkitAudioContext?: typeof AudioContext;
-      };
-      audioCtx = new (_window.AudioContext || _window.webkitAudioContext!)();
+function getAudioContext() {
+  if (!audioCtx) {
+    const _window = window as typeof window & { webkitAudioContext?: typeof AudioContext };
+    audioCtx = new (_window.AudioContext || _window.webkitAudioContext!)();
+
+    // Safari requires resume after a gesture
+    if (audioCtx.state === "suspended") {
+      audioCtx.resume();
     }
-    return audioCtx;
   }
-  
-  export function shortBeep() {
-    const ctx = getAudioContext();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-  
-    osc.type = "sine";
-    osc.frequency.value = 800; // Hz
-    gain.gain.value = 1; // volume
-  
-    osc.connect(gain).connect(ctx.destination);
-    osc.start();
-    osc.stop(ctx.currentTime + 0.15); // 150ms beep
-  }
-  
-  export function longBeep() {
-    const ctx = getAudioContext();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-  
-    osc.type = "sine";
-    osc.frequency.value = 600;
-    gain.gain.value = 1;
-  
-    osc.connect(gain).connect(ctx.destination);
-    osc.start();
-    osc.stop(ctx.currentTime + 0.5); // 500ms beep
-  }
+  return audioCtx;
+}
+
+function playBeep(frequency: number, duration: number) {
+  const ctx = getAudioContext();
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+
+  osc.type = "sine";
+  osc.frequency.value = frequency;
+
+  gain.gain.setValueAtTime(0.2, ctx.currentTime); // start volume
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration); // fade out
+
+  osc.connect(gain).connect(ctx.destination);
+  osc.start();
+  osc.stop(ctx.currentTime + duration);
+}
+
+export function shortBeep() {
+  playBeep(800, 0.2); // 200ms
+}
+
+export function longBeep() {
+  playBeep(600, 0.6); // 600ms
+}
